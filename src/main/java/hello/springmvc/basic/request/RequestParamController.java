@@ -3,11 +3,13 @@ package hello.springmvc.basic.request;
 import java.io.IOException;
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import hello.springmvc.basic.requestMapping.HelloData;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -74,4 +76,21 @@ public class RequestParamController {
 
 		return "ok";
 	}
+
+	@ResponseBody
+	@RequestMapping("/model-attribute-v1")
+	public String modelAttributeV1(@ModelAttribute HelloData helloData) {
+		log.info("username= {}, age= {}", helloData.getUsername(), helloData.getAge());
+
+		return "ok";
+	}
+
+	@ResponseBody
+	@RequestMapping("/model-attribute-v2")	// @ModelAttribute 생략 가능
+	public String modelAttributeV2(HelloData helloData) {
+		log.info("username= {}, age= {}", helloData.getUsername(), helloData.getAge());
+
+		return "ok";
+	}
 }
+
